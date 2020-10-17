@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Video &amp; Audio Input</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="main.css">
+    <style>
+        p>audio,
+        p>video,
+        p>img{
+            max-width:70%;
+        }
+
+        .card {
+              box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+              transition: 0.3s;
+              width: 100%;
+              height: 20%;
+            }
+            
+            .card:hover {
+              box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            }
+            
+            .container {
+              padding: 2px 16px;
+            }
+    </style>
+        <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <div class="app" style="display: none">
+
+       
+        <h1>CAMCORDOVA</h1>
+        <div id="deviceready" class="blink">
+            <p class="event listening">Connecting to Device</p>
+            <p class="event received">Device is Ready</p>
+        </div>
+    </div>
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+
+
+
+    <div class="card" style="text-align: center;" >
+      <div class="container">
+          <button id = "cameraTakePicture" >CAPTURAR IMAGEN</button>
+      </div>
+    </div>
+
+<div class="card" style="text-align: center;" >
+    <div class="container">
+        <button id = "cameraTakeVideo" >GRABAR VIDEO</button>
+    </div>
+  </div>
+
+ 
+
+  <div class="card" style="text-align: center;" >
+    <div class="container">
+        <button id = "cameraTakePicture2">TAKE PICTURE 2</button>
+         <br>   
+        <img width="300" height="100" id = "myImage"></img>
+    </div>
+  </div>
+
+
+
+  
+  <div class="card"
+  style="height: 40%;background-color: lightcyan;width: 80%;margin: auto;border: 1px solid blanchedalmond;padding: 10px;">
+  <div id="video" style="text-align: center;">
+    <button id = "cameraTakeVideo2" >GRABAR VIDEO 2</button>
+      <div id="VIDEO"></div>
+  </div>
+</div>
+    
+    
+    <main>
+        <form action="#" id="myform" enctype="multipart/form-data">
+            <label for="capture">Capture Media</label>
+            
+            <input type="file" 
+            id="capture" 
+            accept="image/*,video/*,audio/*" 
+            capture 
+            multiple />
+            
+            <br/>
+            <input type="submit" value="Process" />
+        </form>
+        <p><img src="" id="img" alt="from phone"/></p>
+        <p>
+            <audio src="" id="audio" controls></audio>
+        </p>
+        <p>
+            <video src="" id="video" controls></video>
+        </p>
+    </main>    
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', (ev)=>{
+            let form = document.getElementById('myform');
+            //get the captured media file
+            let input = document.getElementById('capture');
+            
+            input.addEventListener('change', (ev)=>{
+                console.dir( input.files[0] );
+                if(input.files[0].type.indexOf("image/") > -1){
+                    let img = document.getElementById('img');
+                    img.src = window.URL.createObjectURL(input.files[0]);
+                }
+                else if(input.files[0].type.indexOf("audio/") > -1 ){
+                    let audio = document.getElementById('audio');
+                    audio.src = window.URL.createObjectURL(input.files[0]);
+                }
+                else if(input.files[0].type.indexOf("video/") > -1 ){
+                    let video = document.getElementById('video');
+                    video.src=window.URL.createObjectURL(input.files[0]);
+                }
+                
+                
+            })
+            
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+       
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <style>
+            .card {
+              box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+              transition: 0.3s;
+              width: 100%;
+              height: 20%;
+            }
+            
+            .card:hover {
+              box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            }
+            
+            .container {
+              padding: 2px 16px;
+            }
+            </style>
+        <link rel="stylesheet" href="css/index.css">
+        
+        <title>Hello World</title>
+
+    </head>
+    <body>
+      
+        <div class="app" style="display: none">
+
+       
+            <h1>CAMCORDOVA</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+        </div>
+        <script src="cordova.js"></script>
+        <script src="js/index.js"></script>
+    
+
+   
+        <div class="card" style="text-align: center;" >
+          <div class="container">
+              <button id = "cameraTakePicture" >CAPTURAR IMAGEN</button>
+          </div>
+        </div>
+
+    <div class="card" style="text-align: center;" >
+        <div class="container">
+            <button id = "cameraTakeVideo" >GRABAR VIDEO</button>
+        </div>
+      </div>
+
+     
+
+      <div class="card" style="text-align: center;" >
+        <div class="container">
+            <button id = "cameraTakePicture2">TAKE PICTURE 2</button>
+             <br>   
+            <img width="300" height="100" id = "myImage"></img>
+        </div>
+      </div>
+   
+
+
+      
+      <div class="card"
+      style="height: 40%;background-color: lightcyan;width: 80%;margin: auto;border: 1px solid blanchedalmond;padding: 10px;">
+      <div id="video" style="text-align: center;">
+        <button id = "cameraTakeVideo2" >GRABAR VIDEO 2</button>
+          <div id="VIDEO"></div>
+      </div>
+  </div>
+        
+</body>
+<script>
+        
+    document.addEventListener('DOMContentLoaded', (ev)=>{
+        let form = document.getElementById('myform');
+        //get the captured media file
+        let input = document.getElementById('capture');
+        
+        input.addEventListener('change', (ev)=>{
+            console.dir( input.files[0] );
+            if(input.files[0].type.indexOf("image/") > -1){
+                let img = document.getElementById('img');
+                img.src = window.URL.createObjectURL(input.files[0]);
+            }
+            else if(input.files[0].type.indexOf("audio/") > -1 ){
+                let audio = document.getElementById('audio');
+                audio.src = window.URL.createObjectURL(input.files[0]);
+            }
+            else if(input.files[0].type.indexOf("video/") > -1 ){
+                let video = document.getElementById('video');
+                video.src=window.URL.createObjectURL(input.files[0]);
+            }
+            
+            
+        })
+        
+    })
+</script>
+
+
+</html>
